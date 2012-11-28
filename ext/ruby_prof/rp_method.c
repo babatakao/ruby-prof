@@ -98,9 +98,13 @@ method_name(ID mid)
 {
     VALUE result;
 
+#ifdef ID_ALLOCATOR
     if (mid == ID_ALLOCATOR)
         result = rb_str_new2("allocate");
     else if (mid == 0)
+#else
+    if (mid == 0)
+#endif
         result = rb_str_new2("[No method]");
     else
         result = rb_String(ID2SYM(mid));
